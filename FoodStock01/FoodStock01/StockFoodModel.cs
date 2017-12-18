@@ -148,7 +148,7 @@ namespace FoodStock01
             }
         }
 
-        /********************アップデートメソッド02（プラス）**************************************/
+        /********************アップデートメソッド02（プラス）*************************************/
         public static List<StockFoodModel> UpdateStockPlus02(List<StockFoodModel> s_no)
         {
             using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
