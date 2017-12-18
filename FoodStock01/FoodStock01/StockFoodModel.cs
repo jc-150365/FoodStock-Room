@@ -61,6 +61,29 @@ namespace FoodStock01
             }
         }
 
+        /*******************セレクトメソッド02**************************************/
+        public static List<StockFoodModel> SelectStock02(string s_name,int s_num)
+        {
+            using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
+            {
+                try
+                {
+                    //データベースに指定したSQLを発行
+                    return db.Query<StockFoodModel>("SELECT [S_no] " +
+                                                    "FROM [Stock] " +
+                                                    "WHERE [S_name] = "+ s_name + 
+                                                    "AND [S_num] = "+ s_num);
+
+                }
+                catch (Exception e)
+                {
+
+                    System.Diagnostics.Debug.WriteLine(e);
+                    return null;
+                }
+            }
+        }
+
         /********************デリートメソッド*************************************/
         public static void DeleteStock(int s_no)
         {
@@ -93,7 +116,7 @@ namespace FoodStock01
                 {
                     //データベースにFoodテーブルを作成する
                     db.CreateTable<StockFoodModel>();
-
+                    
                     db.DeleteAll<StockFoodModel>();
                     db.Commit();
                 }
@@ -114,6 +137,27 @@ namespace FoodStock01
                 {
                     //データベースに指定したSQLを発行
                     return db.Query<StockFoodModel>("UPDATE [Stock] SET [S_num] = [S_num] + 1");
+
+                }
+                catch (Exception e)
+                {
+
+                    System.Diagnostics.Debug.WriteLine(e);
+                    return null;
+                }
+            }
+        }
+
+        /********************アップデートメソッド02（プラス）**************************************/
+        public static List<StockFoodModel> UpdateStockPlus02(List<StockFoodModel> s_no)
+        {
+            using (SQLiteConnection db = new SQLiteConnection(App.dbPath))
+            {
+                try
+                {   
+                    //データベースに指定したSQLを発行
+                    return db.Query<StockFoodModel>("UPDATE [Stock] SET [S_num] = [S_num] + 1 " +
+                                                    "WHERE [S_no] = "+ s_no);
 
                 }
                 catch (Exception e)
